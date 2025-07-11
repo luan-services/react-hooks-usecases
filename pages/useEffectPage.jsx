@@ -1,67 +1,76 @@
 import React from 'react'
-import { Contador } from '../components/use_state_page_components/Contador'
-import { CampoDeNome } from '../components/use_state_page_components/CampoDeNome'
-import { AlternarVisibilidade } from '../components/use_state_page_components/AlternarVisibilidade'
-import { ListaDeTarefas } from '../components/use_state_page_components/ListaDeTarefas'
+// Imports atualizados para os componentes de exemplo do useEffect
+import { PerfilPokemon } from '../components/use_effect_page_components/PerfilPokemon'
+import { ContadorComTitulo } from '../components/use_effect_page_components/ContadorComTitulo'
+import { LarguraDaJanela } from '../components/use_effect_page_components/LarguraDaJanela'
+import { SalvarFormLocalStorage } from '../components/use_effect_page_components/SalvarFormLocalStorage'
 
 export const UseEffectPage = () => {
   return (
     <div className="w-full flex flex-col gap-6">
-        <div className="text-xs md:text-sm flex flex-col gap-4">
-            <p>
-                O useState é um dos "Hooks" (ganchos) mais fundamentais e utilizados no React. Ele permite que você adicione e gerencie o estado de um componente de função. Em termos simples, o useState dá ao seu componente a capacidade de "lembrar" de informações que podem mudar ao longo do tempo e de reagir a essas mudanças, atualizando a interface do usuário.
-            </p>	
-            <p>
-                Antes dos Hooks, a capacidade de ter um estado era exclusiva dos componentes de classe. O useState revolucionou o desenvolvimento em React ao trazer essa e outras funcionalidades para a sintaxe mais simples e concisa dos componentes de função.
-            </p>	
-        </div>
-        <p className="font-bold md:text-lg">
-            Exemplos Práticos
+      <div className="text-xs md:text-sm flex flex-col gap-4">
+        <p>
+          O useEffect é o Hook que permite que seu componente execute "efeitos colaterais" (side effects). Um efeito colateral é qualquer interação com o mundo fora do seu componente, algo que afeta "o lado de fora" ou que é afetado "pelo lado de fora".
         </p>
-        <p className="font-bold md:text-lg">
-            1. Contador
+        <p>
+          Ele sincroniza seu componente com sistemas externos, como buscar dados de uma API, manipular o DOM diretamente (ex: mudar o título da página), configurar timers como `setInterval` ou salvar dados no `localStorage`. Em resumo, enquanto o `useState` dá "memória" ao componente, o `useEffect` permite que ele "aja".
         </p>
-        <div className="flex w-full justify-center">
-            <Contador/>
-        </div>
-        <p className="text-xs md:text-sm">
-            useState(0) define que o estado contagem começa com o valor 0.
-            <br></br>
-            Sempre que o botão é clicado, setContagem(contagem + 1) é executado.
-            <br></br>
-            O React, ao perceber que o estado foi alterado, re-renderiza o componente Contador, exibindo o novo valor de contagem.
+        <p>
+          A chave para controlar o `useEffect` é seu segundo argumento: o **array de dependências**. Ele determina **quando** o efeito deve ser executado novamente, otimizando a performance e evitando execuções desnecessárias.
         </p>
-        <p className="font-bold md:text-lg">
-            2. Manipulando Texto
-        </p>
-        <div className="w-full flex justify-center">
-            <CampoDeNome/>
-        </div>
-        <p className="text-xs md:text-sm">
-            Aqui, o estado nome armazena o texto do campo de input. O evento onChange atualiza o estado a cada tecla digitada, e a saudação é exibida em tempo real.
-        </p>
-        <p className="font-bold md:text-lg">
-            3. Controlando um Elemento
-        </p>
-        <div className="w-full flex justify-center">
-            <AlternarVisibilidade/>
-        </div>
-        <p className="text-xs md:text-sm">
-            Neste caso, estaVisivel (um booleano true ou false) controla se o bloco será ou não renderizado na tela.
-        </p>
-        <p className="font-bold md:text-lg">
-            4. Incluindo items em Arrays
-        </p>
-        <div className="w-full flex justify-center">
-            <ListaDeTarefas/>
-        </div>
-        <p className="text-xs md:text-sm">
-            Gerenciar uma lista de itens é um caso de uso clássico. Neste exemplo, vamos criar uma lista de tarefas onde podemos adicionar novos itens. A chave aqui é entender como atualizar um array no estado de forma imutável.
-            <br></br><br></br>
-            Por que imutabilidade? Você nunca deve modificar o estado diretamente (ex: meuArray.push(novoItem)). O React depende da criação de um novo array para detectar a mudança e disparar a re-renderização. A forma mais fácil de fazer isso é com o operador "spread" (...).
-        </p>
+      </div>
+
+      <p className="font-bold md:text-lg">
+        Exemplos Práticos
+      </p>
+
+      <p className="font-bold md:text-lg">
+        1. Buscar Dados de uma API (Data Fetching)
+      </p>
+      <div className="flex w-full justify-center">
+        <PerfilPokemon />
+      </div>
+      <p className="text-xs md:text-sm">
+        Este é o uso mais comum. O efeito é acionado assim que o componente é montado para buscar dados. Quando se usa busca com fetch, é uma boa
+        prática criar um componente apenas para receber um valor e usar fetch com esse valor, para trazer de volta um componente usando os dados do fetch.
+        <br></br>
+        O array de dependências `[pokemonId]` garante que uma nova busca só será feita se o ID do Pokémon mudar, e não a cada nova renderização do componente. Existem
+        outras formas de dar fetch em dados, como libraries como axios e tanstacky (que não precisam de useEffect). Mas o useEffect só é necessário se usar fetch()
+      </p>
+
+      <p className="font-bold md:text-lg">
+        2. Manipular o Título da Página (Interação com o DOM)
+      </p>
+      <div className="w-full flex justify-center">
+        <ContadorComTitulo />
+      </div>
+      <p className="text-xs md:text-sm">
+        O efeito altera o `document.title` da página. Como sua dependência é `[contagem]`, ele só é executado quando o estado `contagem` muda, ignorando outras atualizações de estado e otimizando a performance.
+      </p>
+
+      <p className="font-bold md:text-lg">
+        3. Ouvir Eventos do Navegador (com Limpeza / Cleanup)
+      </p>
+      <div className="w-full flex justify-center">
+        <LarguraDaJanela />
+      </div>
+      <p className="text-xs md:text-sm">
+        O efeito adiciona um `event listener` para o `resize` da janela. O mais importante aqui é a **função de limpeza** retornada pelo efeito.
+        <br></br><br></br>
+        Ela é executada quando o componente é desmontado, removendo o `listener` e prevenindo vazamentos de memória (memory leaks). O array vazio `[]` faz com que o efeito seja configurado apenas uma vez.
+      </p>
+
+      <p className="font-bold md:text-lg">
+        4. Salvar Estado no `localStorage`
+      </p>
+      <div className="w-full flex justify-center">
+        <SalvarFormLocalStorage />
+      </div>
+      <p className="text-xs md:text-sm">
+        Este exemplo mostra como sincronizar o estado de um componente com o `localStorage` do navegador.
+        <br></br><br></br>
+        O `useEffect` é acionado toda vez que o estado `nome` muda, salvando o valor mais recente. Na primeira renderização, o `useState` recupera este valor salvo, criando uma experiência persistente para o usuário.
+      </p>
     </div>
   )
 }
-
-
