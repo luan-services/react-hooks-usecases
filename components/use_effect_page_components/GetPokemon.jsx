@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
 export const GetPokemon = ({ pokemonId }) => {
-    // Estado para armazenar os dados do Pokémon
+    // estado para armazenar os dados do Pokémon
     const [pokemon, setPokemon] = useState(null);
-    // Estado para controlar o carregamento
+    // estado para controlar o carregamento
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Para evitar que o efeito tente rodar com um ID inválido
+        // para evitar que o efeito tente rodar com um ID inválido
         if (!pokemonId) return;
 
-        // Reseta o estado de loading e pokemon antes de uma nova busca
+        // reseta o estado de loading e pokemon antes de uma nova busca
         setLoading(true);
         setPokemon(null);
 
-        // A função de efeito que busca os dados
+        // a função de efeito que busca os dados
         fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(response => response.json())
         .then(data => {
             setPokemon(data); // Armazena os dados no estado

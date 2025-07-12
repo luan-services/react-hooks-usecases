@@ -46,6 +46,10 @@ export const UseEffectPage = () => {
       </div>
       <p className="text-xs md:text-sm">
         O efeito altera o `document.title` da página. Como sua dependência é `[contagem]`, ele só é executado quando o estado `contagem` muda, ignorando outras atualizações de estado e otimizando a performance.
+        <br></br>
+        Qualquer manipulação do dom deve ser feita dentro do useEffect pelo fato de que se for feito direto no código, o react não reconhece aquela mudança, e quando renderizar o app, ele vai sobreescreve-la, pois ele não sabe que aquilo foi feito.
+        <br></br>
+         Tentar fazer isso durante a renderização é criar uma disputa pelo controle do DOM, uma batalha que o React sempre vencerá para garantir a consistência da UI, resultando em um código instável e imprevisível.
       </p>
 
       <p className="font-bold md:text-lg">
