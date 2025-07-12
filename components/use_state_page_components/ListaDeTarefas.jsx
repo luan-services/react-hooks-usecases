@@ -28,7 +28,7 @@ export const ListaDeTarefas = () => {
     }
 
     return (
-        <div className="shadow-md border-gray-200 border-1 w-120 min-h-60 p-8 flex flex-col gap-4 ">
+        <div className="shadow-md border-gray-200 border-1 w-120 min-h-60 p-8 flex flex-col gap-4">
             <form onSubmit={handleAdicionarTarefa} className="gap-4 flex flex-wrap flex-row justify-start">
                 <input className="border-gray-500 border-1 rounded-sm p-1 outline-0 focus:border-blue-500"
                 type="text" value={novaTarefa} onChange={(e) => handleTarefaInput(e)} placeholder="Digite uma nova tarefa"/>
