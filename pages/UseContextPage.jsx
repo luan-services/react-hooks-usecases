@@ -1,10 +1,4 @@
 import React from 'react'
-// Imports atualizados para os componentes de exemplo do useEffect
-import { PerfilPokemon } from '../components/use_effect_page_components/PerfilPokemon'
-import { ContadorComTitulo } from '../components/use_effect_page_components/ContadorComTitulo'
-import { LarguraDaJanela } from '../components/use_effect_page_components/LarguraDaJanela'
-import { SalvarFormLocalStorage } from '../components/use_effect_page_components/SalvarFormLocalStorage'
-import { BuscaDebounced } from '../components/use_effect_page_components/BuscaDebounce'
 import { ThemeContainer } from '../components/use_context_page_components/themeContext/ThemeContainer'
 import { AuthContainer } from '../components/use_context_page_components/authContext/AuthContainer'
 

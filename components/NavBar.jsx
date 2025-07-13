@@ -19,6 +19,11 @@ export const Navbar = () => {
 					UseContext
 				</p>
 			</NavLink>
+			<NavLink className={({ isActive }) => isActive ? 'text-blue-600' : 'text-gray-500'} to="/useReducer">
+				<p className="font-bold transition active:scale-95">
+					UseReducer
+				</p>
+			</NavLink>
 		</nav>
 	);
 }

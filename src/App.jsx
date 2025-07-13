@@ -3,8 +3,7 @@ import { Layout } from '../components/Layout'
 import { UseStatePage } from '../pages/UseStatePage'
 import { UseEffectPage } from '../pages/useEffectPage'
 import { UseContextPage } from '../pages/UseContextPage'
-
-
+import { UseReducerPage } from '../pages/useReducerPage'
 
 // 1. Define your routes as an array of objects
 const router = createBrowserRouter([
@@ -23,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/useContext',
         element: <UseContextPage />,
+      },
+      {
+        path: '/useReducer',
+        element: <UseReducerPage />,
       },
     ],
   },
